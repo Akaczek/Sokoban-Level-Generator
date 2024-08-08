@@ -23,7 +23,7 @@ export const generateMaps = (howMany: number, size: number) => {
 
     const replacer = (key: string, value: any) => {
       if (key === 'data' && Array.isArray(value)) {
-        return value.map(row => JSON.stringify(row).replace(/,/g, ', '));
+        return value.map((row) => JSON.stringify(row).replace(/,/g, ', '));
       }
       return value;
     };
@@ -33,18 +33,26 @@ export const generateMaps = (howMany: number, size: number) => {
       .replace(/\]"/g, ']')
       .replace(/\\/g, '');
 
-    fs.mkdirSync(`generatedMaps/puzzle${i + 1}`, { recursive: true });
+    fs.mkdirSync(`maps/puzzle${i + 1}`, { recursive: true });
+
+    fs.writeFileSync(`maps/puzzle${i + 1}/map.json`, jsonString, 'utf8');
 
     fs.writeFileSync(
-      `generatedMaps/puzzle${i + 1}/map.json`,
-      jsonString,
-      'utf8'
-    );
-
-    fs.writeFileSync(
-      `generatedMaps/puzzle${i + 1}/index.ts`,
+      `maps/puzzle${i + 1}/index.ts`,
       INDEX_FILE_TEMPLATE,
       'utf8'
     );
   }
+
+  let indexFileContent = '';
+  for (let i = 1; i <= howMany; i++) {
+    indexFileContent += `import pzl${i} from './puzzle${i}';\n`;
+  }
+  indexFileContent += '\nexport default [\n';
+  for (let i = 1; i <= howMany; i++) {
+    indexFileContent += `  pzl${i},\n`;
+  }
+  indexFileContent += '];\n';
+
+  fs.writeFileSync('maps/index.ts', indexFileContent, 'utf8');
 };
