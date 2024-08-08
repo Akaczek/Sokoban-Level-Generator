@@ -40,7 +40,7 @@ export const findZeros = (matrix: number[][]) => {
 export const putTemplates = (path: number[][], templates: number[][][]) => {
   const zerosCoords = findZeros(path);
 
-  const steps = path.length - Math.floor(path.length / 3);
+  const steps = path.length - Math.floor(path.length / 4);
 
   for (let i = 0; i < steps; i++) {
     const randomZeroCoord = zerosCoords.splice(Math.floor(Math.random() * zerosCoords.length), 1)[0];

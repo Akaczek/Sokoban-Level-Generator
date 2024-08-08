@@ -37,3 +37,20 @@ export const createRandomPath = (size: number) => {
 
   return emptyMatrix;
 };
+
+export const putOnesOnEdges = (matrix: number[][]) => {
+  const rows = matrix.length;
+  const cols = matrix[0].length;
+
+  // Set the first and last rows to 1
+  for (let j = 0; j < cols; j++) {
+    matrix[0][j] = 1;
+    matrix[rows - 1][j] = 1;
+  }
+
+  // Set the first and last columns to 1
+  for (let i = 0; i < rows; i++) {
+    matrix[i][0] = 1;
+    matrix[i][cols - 1] = 1;
+  }
+};
