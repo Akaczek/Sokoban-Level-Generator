@@ -1,3 +1,9 @@
 import { generateMaps } from './generateMaps';
+import { flattenMap } from './utils/flattenMap';
 
-generateMaps(10, 20);
+const HOW_MANY = 10;
+const SIZE = 20;
+
+generateMaps(HOW_MANY, SIZE);
+
+flattenMap();

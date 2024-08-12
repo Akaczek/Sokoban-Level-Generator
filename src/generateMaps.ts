@@ -19,7 +19,7 @@ export const generateMaps = (howMany: number, size: number) => {
 
     putOnesOnEdges(path);
 
-    const jsonMap = generateJSONMap(path);
+    const jsonMap = generateJSONMap(path, i + 1);
 
     const replacer = (key: string, value: any) => {
       if (key === 'data' && Array.isArray(value)) {
