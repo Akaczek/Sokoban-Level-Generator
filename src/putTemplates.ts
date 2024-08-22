@@ -37,13 +37,16 @@ export const findZeros = (matrix: number[][]) => {
   return zeros;
 }
 
-export const putTemplates = (path: number[][], templates: number[][][]) => {
-  const zerosCoords = findZeros(path);
+export const putTemplates = (path: number[][], templates: number[][][], originalPath: number[][]) => {
+  const zerosCoords = findZeros(originalPath);
 
   const steps = path.length - Math.floor(path.length / 4);
 
   for (let i = 0; i < steps; i++) {
     const randomZeroCoord = zerosCoords.splice(Math.floor(Math.random() * zerosCoords.length), 1)[0];
+    if (!randomZeroCoord) {
+      break;
+    }
     const randomTemplate = templates[Math.floor(Math.random() * templates.length)];
 
     const randomShiftX = Math.floor(Math.random() * (randomTemplate[0].length - 1));

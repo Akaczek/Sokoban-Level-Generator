@@ -13,7 +13,9 @@ export const generateMaps = (howMany: number, size: number) => {
 
     const path = createRandomPath(size);
 
-    putTemplates(path, templates);
+    const originalPath = path.map((row) => row.slice());
+
+    putTemplates(path, templates, originalPath);
 
     emptyMiddleInMatrix(path);
 
